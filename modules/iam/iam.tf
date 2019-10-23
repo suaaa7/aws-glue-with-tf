@@ -18,9 +18,19 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
+data "aws_iam_policy_document" "default" {
+  source_json = var.policy
+
+  statement {
+    effect    = "Allow"
+    actions   = ["s3:GetObject"]
+    resources = ["arn:aws:s3:::awsglue-datasets/examples/*"]
+  }
+}
+
 resource "aws_iam_policy" "default" {
   name   = var.name
-  policy = var.policy
+  policy = data.aws_iam_policy_document.default.json
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
