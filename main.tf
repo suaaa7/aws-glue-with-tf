@@ -13,10 +13,10 @@ module "glue_role" {
 
   name       = "glue"
   identifier = "glue.amazonaws.com"
-  policy     = data.aws_iam_policy.ecs_tasks_role_policy.policy
+  policy     = data.aws_iam_policy.glue_role_policy.policy
 }
 
-data "aws_iam_policy" "ecs_tasks_role_policy" {
+data "aws_iam_policy" "glue_role_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
 
